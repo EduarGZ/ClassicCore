@@ -1,0 +1,61 @@
+﻿@page "/"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout;
+
+<div class="page-video">
+    <!-- Video de fondo -->
+    <video id="bgVideo" autoplay muted loop playsinline>
+        <source src="imagenes/mariovideo.mp4" type="video/mp4">
+        Tu navegador no soporta video en HTML5.
+    </video>
+    <!-- Contenido encima del video -->
+    <div class="separacion">
+        <img src="imagenes/classic.png">
+    </div>
+    <br />
+    <center>
+        <!-- Botón para activar sonido (solo visible en móviles con CSS) -->
+        <button class="activar-sonido-btn"
+                onclick="document.getElementById('bgVideo').muted=false; document.getElementById('bgVideo').play(); this.style.display='none';">
+            🔊 Activar Sonido
+        </button>
+
+        <br />
+        <NavLink class="neon-btn separacion2" href="Alias">
+            🚀 Ir a Página
+        </NavLink>
+    </center>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("bgVideo");
+        const btn = document.getElementById("activarSonido");
+
+        if (video && btn) {
+    btn.addEventListener("click", async () => {
+        try {
+            video.muted = false;
+            const src = video.querySelector("source").src;
+            video.src = src; // recargar fuente
+            await video.play();
+            btn.style.display = "none";
+        } catch (err) {
+            console.log("Error al activar sonido:", err);
+        }
+    });
+
+        }
+    });
+</script>
+
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+
+

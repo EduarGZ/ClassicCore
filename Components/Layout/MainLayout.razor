@@ -1,0 +1,78 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <main>
+        <!-- Navbar nuevo centrado -->
+        <!-- Navbar Corregida -->
+        <nav class="navbar navbar-expand-md navbar-dark glass-nav">
+            <!-- FIX 4: Eliminada la clase 'justify-content-center' del container-fluid para alinear el toggler a la derecha. -->
+            <div class="container-fluid">
+
+                <!-- Logo/Brand a la izquierda -->
+                <a class="navbar-brand me-3" href="#">MauiApp1</a>
+
+                <!-- Botón hamburguesa alineado automáticamente a la derecha -->
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navMenu"
+                        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú -->
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav text-center">
+
+                        <!-- Dropdown Juegos Clásicos -->
+                        <li class="nav-item dropdown px-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="juegosClasicos"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Juegos Clásicos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="juegosClasicos">
+                                <li><a class="dropdown-item" href="MarioBros">Mario Bros</a></li>
+                                <li><a class="dropdown-item" href="Pacman">Pac-man</a></li>
+                                <li><a class="dropdown-item" href="#">Tetrix</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Link Créditos -->
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="#">Créditos</a>
+                        </li>
+
+                        <!-- Dropdown Mini Juegos -->
+                        <li class="nav-item dropdown px-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="miniJuegos"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mini Juegos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="miniJuegos">
+                                <li><a class="dropdown-item" href="Memoria">Memoria</a></li>
+                                <li><a class="dropdown-item" href="PerroCazador">Duck-Hut</a></li>
+                                <li><a class="dropdown-item" href="FlappyBird">Flappy-Bird</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+        <!-- Contenido de la página -->
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private bool isMenuOpen = false;
+
+    private void ToggleMenu() => isMenuOpen = !isMenuOpen;
+    private void CloseMenu() => isMenuOpen = false;
+}

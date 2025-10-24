@@ -1,0 +1,35 @@
+﻿@page "/Pacman"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout;
+
+<a id="volver" href="Inicio">⬅ Volver atrás</a>
+<div class="juego-container">
+    <center>
+        <canvas id="board"></canvas>
+        <div class="dpad-container controlsJuego2">
+            <div class="dpad-grid">
+                <button id="up" class="dpad2-btn up" data-dir="U">▲</button>
+                <button id="left" class="dpad2-btn left" data-dir="L">◀</button>
+                <button id="right" class="dpad2-btn right" data-dir="R">▶</button>
+                <button id="down" class="dpad2-btn down" data-dir="D">▼</button>
+            </div>
+            <!-- Botón redondo extra -->
+            <button class="dpad2-btn action">●</button>
+        </div>
+
+
+    </center>
+</div>
+
+@code {
+    @inject IJSRuntime JS // Mantenemos la inyección para llamar a startPacman
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Llama a la función principal del juego, que ahora inicializa los controles táctiles.
+            await JS.InvokeVoidAsync("startPacman");
+        }
+    }
+}

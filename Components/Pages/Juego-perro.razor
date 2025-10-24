@@ -1,0 +1,23 @@
+﻿@page "/PerroCazador"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout;
+
+@inject IJSRuntime JS
+<a id="volver" href="Inicio">⬅ Volver atrás</a>
+<div id="juego-contenedor" class="juego-contenedor">
+    <div id="suelo" class="suelo"></div>
+    <p id="score" style="margin-top:40px" class="score">0</p>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("inicializarJuegoPerro");
+        }
+    }
+}
+
+
+

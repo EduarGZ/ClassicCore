@@ -1,0 +1,20 @@
+﻿@page "/FlappyBird"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout
+@inject IJSRuntime JS
+
+<a id="volver" style="margin-left: 35px;" href="Inicio">⬅ Volver atrás</a>
+<div class="imagenfondo">
+    <canvas id="boardBird"></canvas>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("startFlappy");
+        }
+    }
+}
+

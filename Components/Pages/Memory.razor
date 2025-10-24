@@ -1,0 +1,33 @@
+﻿@page "/Memoria"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout;
+@inject IJSRuntime JS;
+
+<!-- Simulación del body -->
+<div class="body-simulada">
+    <a id="volver" href="Inicio">⬅ Volver atrás</a>
+    <div id="stats">0 intentos</div>
+
+    <div id="wrapper">
+        <!-- Aquí el JS generará las cartas dinámicamente -->
+        <div id="game"></div>
+
+        <!-- Contenedor de mensaje de victoria -->
+        <div id="mensajeGanador" style="display:none;">
+            <h1>🎉 ¡Felicidades, has ganado! 🎉</h1>
+            <button id="reiniciar">Reiniciar</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // ✅ Si tu JS está cargado globalmente, basta con llamar a la función principal:
+            await JS.InvokeVoidAsync("initGame");
+        }
+    }
+}
+

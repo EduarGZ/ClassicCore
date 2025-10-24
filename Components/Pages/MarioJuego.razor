@@ -1,0 +1,50 @@
+﻿@page "/MarioBros"
+@using MauiApp1.Components.Layout;
+@layout SinMenuLayout
+@inject IJSRuntime JS
+
+<PageTitle>Super Mario Bros - Blazor</PageTitle>
+<a id="volver" href="Inicio">⬅ Volver atrás</a>
+<div class="full-screen-container">
+    <canvas id="miCanvas22" class="full-screen-canvas" width="500" height="356"></canvas>
+
+    <!-- Nuevo contenedor para organizar D-pad y botón de acción -->
+    <div class="control-wrapper">
+        <!-- D-Pad (solo flechas laterales) -->
+        <div class="dpad-container">
+            <div class="dpad-middle">
+                <!-- Se mantienen solo las flechas de movimiento horizontal -->
+                <button id="left" class="dpad-btn left" data-dir="L">◀</button>
+                <button id="right" class="dpad-btn right" data-dir="R">▶</button>
+            </div>
+            <!-- Los botones 'up' y 'down' han sido eliminados -->
+        </div>
+
+        <!-- Botón de Acción/Salto/Reinicio -->
+        <button id="jump-reinicio" class="action-btn" data-action="JUMP">
+            A
+        </button>
+
+        <button id="btnReiniciar" onclick="reiniciarJuego()" class="reiniciar-btn">🔄</button>
+
+    </div>
+</div>
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Esto se ejecuta después de que el HTML del componente ha sido dibujado.
+        if (firstRender)
+        {
+            try
+            {
+                // 3. Llama a la función JavaScript para iniciar el juego.
+                await JS.InvokeVoidAsync("iniciarJuegoMario");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores si la función no existe o falla
+                Console.WriteLine($"Error al iniciar el juego: {ex.Message}");
+            }
+        }
+    }
+}
