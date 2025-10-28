@@ -1,6 +1,139 @@
-﻿<h3>YO Rafa y yoss tambien hize Creditos</h3>
+﻿@page "/Creditos"
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Proyecto Final - Desarrollo de Software</PageTitle>
+
+<video autoplay muted loop id="videoFondo25">
+    <source src="imagenes/videoFondoYosi.mp4" type="video/mp4">
+</video>
+
+<div class="vader-root">
+    <section class="vader-section">
+        <h1>¡Muchas gracias a todos por su atención!</h1>
+        <p class="frodo-p1">
+            Somos estudiantes de 3er año de Desarrollo de Software 'A' y este trabajo es una clara muestra de lo que se puede lograr con esfuerzo y creatividad en esta especialidad. ¡Si les apasiona la tecnología, los invitamos a unirse a la familia de Desarrolladores!
+        </p>
+    </section>
+
+    <img src="imagenes/classic.png" class="neo-banner" alt="Banner principal">
+
+    <section class="trinity-mix">
+        <div class="atreyu-wrapper">
+            <h2 style="color:white; text-shadow: 2px 2px 0 #333, 3px 3px 0 #333, 4px 4px 0 #111, 5px 5px 5px rgba(0,0,0,0.5);">Tecnologías Usadas</h2>
+
+            <div class="elysian-box leia-left">
+                <img src="imagenes/blazor.png" alt="Blazor Hybrid" />
+                <div class="marty-text">
+                    <h3 style="color:#000; font-weight:900; text-shadow: 1px 1px 0 #666;">Blazor Hybrid</h3>
+                    <p>
+                        Permite desarrollar aplicaciones multiplataforma usando C# y Razor.
+                        Combina la potencia de .NET con la flexibilidad de interfaces nativas.
+                        Ideal para apps modernas con rendimiento y mantenimiento sencillo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="elysian-box hulk-right">
+                <img src="imagenes/sql.png" alt="SQL" />
+                <div class="marty-text">
+                    <h3 style="color:#000; font-weight:900; text-shadow: 1px 1px 0 #666;">SQL Server</h3>
+                    <p>
+                        Lenguaje estándar para gestión de bases de datos relacionales.
+                        Permite consultas, inserciones, actualizaciones y manejo eficiente de datos.
+                        Es fundamental para cualquier aplicación que maneje información estructurada.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INICIO DE LA SECCIÓN DE RATING Y RESEÑA -->
+    <section class="vader-section">
+        <div class="rogue-rating">
+            <h2>Déjanos tu Calificación y Opinión</h2>
+
+            <div class="stark-stars">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    int starValue = i;
+                    <span class="stark-star @(i <= currentRating ? "active" : "")"
+                          @onclick="@(() => SetRating(starValue))"
+                          title="Estrella @i">
+                        ★
+                    </span>
+                }
+            </div>
+
+            <!-- Campo de Reseña -->
+            <textarea @bind="reviewText"
+                      placeholder="Escribe tu reseña aquí..."
+                      rows="3"
+                      class="yoda-input"></textarea>
+
+            <!-- Mensaje de retroalimentación en pantalla -->
+            <div class="mensaje">
+                @if (currentRating > 0)
+                {
+                    <text>¡Gracias! Has seleccionado @currentRating estrella@(currentRating > 1 ? "s" : "").</text>
+                }
+                else
+                {
+                    <text>Por favor, selecciona una calificación.</text>
+                }
+            </div>
+
+            <button @onclick="EnviarOpinion">Enviar Opinión</button>
+
+            <!-- Mensaje de Éxito/Error (Reemplazo de Alert) -->
+            <div class="palpatine-feedback @feedbackCssClass">
+                @feedbackMessage
+            </div>
+        </div>
+    </section>
+</div>
 
 @code {
-   
+    private int currentRating = 0;
+    private string reviewText = string.Empty;
+    private string feedbackMessage = string.Empty;
+    private string feedbackCssClass = string.Empty;
 
+    private void SetRating(int value)
+    {
+        currentRating = value;
+        feedbackMessage = string.Empty;
+        feedbackCssClass = string.Empty;
+    }
+
+    private async Task EnviarOpinion()
+    {
+        if (currentRating == 0)
+        {
+            feedbackMessage = "🛑 Debes seleccionar al menos una estrella para enviar tu opinión.";
+            feedbackCssClass = "error";
+            return;
+        }
+
+        string reviewContent = string.IsNullOrWhiteSpace(reviewText)
+            ? "No se proporcionó ningún comentario."
+            : $"Comentario: \"{reviewText.Trim()}\"";
+
+        string ratingText = $"Calificación: {currentRating} estrella{(currentRating > 1 ? "s" : "")}.";
+
+        feedbackMessage = $"✅ ¡Opinión enviada con éxito! {ratingText} {reviewContent}";
+        feedbackCssClass = "success";
+
+        // Si quieres reiniciar después de enviar, descomenta:
+        // currentRating = 0;
+        // reviewText = string.Empty;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeAnimations");
+        }
+    }
 }
+

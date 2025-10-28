@@ -1,0 +1,347 @@
+﻿/* --- CONTENEDOR RAÍZ (evita tocar html/body global) --- */
+.vader-root {
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+#videoFondo25 {
+    position: fixed; /* 🔒 queda fijo al fondo */
+    top: 0;
+    left: 0;
+    width: 100vw; /* cubre todo el ancho de la ventana */
+    height: 100vh; /* cubre todo el alto visible */
+    object-fit: cover; /* mantiene proporciones y llena toda la pantalla */
+    z-index: -1; /* lo manda detrás de todo el contenido */
+    filter: brightness(0.6); /* opcional: oscurece un poco para que el texto resalte */
+    pointer-events: none; /* evita que bloquee clics o animaciones */
+}
+
+
+/* Secciones dentro del root */
+.vader-root .vader-section {
+    height: auto;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+    .vader-root .vader-section:first-of-type {
+        justify-content: flex-start;
+        padding-top: 15vh;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .vader-root .vader-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* TITULOS Y PARRAFOS */
+.vader-root h1 {
+    color: white;
+    font-size: 3.5em;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0 #333, 3px 3px 0 #333, 4px 4px 0 #111, 5px 5px 5px rgba(0,0,0,0.5);
+}
+
+.vader-root .frodo-p1 {
+    color: white;
+    font-size: 2.4em;
+    font-weight: 600;
+    line-height: 1.6;
+    max-width: 1145px;
+    margin-top: 10px;
+    padding: 0 20px;
+    text-shadow: 1px 1px 0 #222, 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+/* SECCIÓN MIXTA */
+.vader-root .trinity-mix {
+    min-height: 100vh; /* altura total visible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centra verticalmente */
+    align-items: center; /* centra horizontalmente */
+    padding: 60px 0; /* deja espacio arriba y abajo */
+}
+
+/* IMAGEN BANNER */
+.vader-root .neo-banner {
+    width: 75%;
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 40px auto;
+    object-fit: contain;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+
+    .vader-root .neo-banner:hover {
+        transform: scale(1.03);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+/* CAJAS */
+.vader-root .atreyu-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* centra el contenido interno */
+    gap: 35px; /* separación entre cajas */
+    margin: 0 auto;
+}
+
+.vader-root .elysian-box {
+    justify-content: center; /* centra la imagen + texto */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,250,240,0.95));
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform .8s ease;
+    z-index: 3;
+}
+
+    .vader-root .elysian-box:hover {
+        transform: scale(1.03);
+    }
+
+    .vader-root .elysian-box img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 20px;
+    }
+
+.vader-root .marty-text {
+    flex: 1;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    color: #333;
+}
+
+.vader-root .leia-left img {
+    margin-right: 40px;
+    margin-left: 0;
+}
+
+.vader-root .hulk-right {
+    flex-direction: row-reverse;
+}
+
+    .vader-root .hulk-right img {
+        margin-left: 40px;
+        margin-right: 0;
+    }
+
+/* --- ESTILOS PARA LA SECCIÓN DE RATING Y RESEÑA --- */
+.vader-root .rogue-rating {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,250,240,0.95));
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    margin-top: -20px;
+}
+
+.vader-root .stark-stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.vader-root .stark-star {
+    font-size: 3.5em;
+    cursor: pointer;
+    color: #ccc;
+    transition: transform 0.2s, color 0.2s;
+    display: inline-block;
+    user-select: none;
+}
+
+    .vader-root .stark-star.active,
+    .vader-root .stark-star:hover {
+        color: gold;
+        transform: scale(1.1);
+    }
+
+/* Reseña (textarea) */
+.vader-root .yoda-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    resize: vertical;
+    min-height: 100px;
+    font-size: 1em;
+    margin-top: 15px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Botón */
+.vader-root button {
+    margin-top: 25px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 4px #357abd;
+}
+
+    .vader-root button:hover {
+        background-color: #357ABD;
+        transform: translateY(1px);
+        box-shadow: 0 3px #357abd;
+    }
+
+    .vader-root button:active {
+        transform: translateY(4px);
+        box-shadow: 0 0 #357abd;
+    }
+
+/* Mensaje de Feedback */
+.vader-root .palpatine-feedback {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+    .vader-root .palpatine-feedback.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        opacity: 1;
+    }
+
+    .vader-root .palpatine-feedback.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        opacity: 1;
+    }
+
+/* --- MEDIA QUERIES MÓVIL (todas las reglas scoped dentro de .vader-root) --- */
+@media screen and (max-width: 460px) {
+    .vader-root h1 {
+        font-size: 1.8em;
+        margin-top: 20px;
+        text-shadow: 1px 1px 0 #333, 2px 2px 0 #333, 3px 3px 0 #111, 4px 4px 4px rgba(0,0,0,0.3);
+    }
+
+    .vader-root .frodo-p1 {
+        font-size: 1em;
+        line-height: 1.4em;
+        padding: 0 10px;
+    }
+
+    .vader-root .neo-banner {
+        width: 90%;
+        max-width: 320px;
+        margin: 20px auto;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .vader-root .trinity-mix {
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .vader-root .atreyu-wrapper {
+        width: 95%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vader-root .elysian-box {
+        flex-direction: column !important;
+        align-items: center;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+        .vader-root .elysian-box img {
+            width: 120px;
+            height: 120px;
+            margin: 0 0 15px 0 !important;
+        }
+
+    .vader-root .marty-text {
+        text-align: center;
+        font-size: 0.9em;
+        line-height: 1.3em;
+    }
+
+    .vader-root .rogue-rating {
+        width: 95%;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 40px auto 0 auto;
+    }
+
+    .vader-root .stark-stars {
+        font-size: 1em;
+        gap: 8px;
+    }
+
+    .vader-root .yoda-input {
+        width: 100%;
+        font-size: 0.9em;
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    .vader-root button {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-top: 15px;
+    }
+}
+
+/* Clase reutilizable para inputs/resenas si hace falta */
+.vader-root .reseña-input-reusable {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+}
