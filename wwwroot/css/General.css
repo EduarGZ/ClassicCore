@@ -257,7 +257,7 @@
     }
 
 /* --- MEDIA QUERIES MÓVIL (todas las reglas scoped dentro de .vader-root) --- */
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 360px) {
     .vader-root h1 {
         font-size: 1.8em;
         margin-top: 20px;
@@ -310,14 +310,18 @@
     }
 
     .vader-root .rogue-rating {
-        width: 95%;
+        width: 100%;
+        max-width: 410px; /* 🔹 controla que no se alargue demasiado */
         padding: 20px;
         border-radius: 15px;
-        margin: 40px auto 0 auto;
+        margin: 10px auto 0 auto;
+        margin-top: -17px;
+
     }
 
+
     .vader-root .stark-stars {
-        font-size: 1em;
+        font-size: 0.8em;
         gap: 8px;
     }
 
@@ -331,7 +335,7 @@
     .vader-root button {
         padding: 10px 20px;
         font-size: 1em;
-        margin-top: 15px;
+        margin-top: 8px;
     }
 }
 

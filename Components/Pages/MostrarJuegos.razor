@@ -1,4 +1,5 @@
 ﻿@page "/Inicio"
+@inject MauiApp1.Services.UserService UserService
 
 <div class="page-video">
     <!-- Video de fondo -->
@@ -9,7 +10,7 @@
 
     <section class="content-section">
         <div class="text-card">
-            <h1 class="text-primary-title">Bienvenidos</h1>
+            <h1 class="text-primary-title">Hola @UserService.Nombre, Bienvenidos</h1>
             <p class="lead text-white-70">
                 Revive la magia de los juegos clásicos con una colección llena de nostalgia y diversión. Corre, salta, esquiva obstáculos,<br /> pon a prueba tu memoria y desafía tus reflejos en un<br /> solo lugar, donde cada partida te lleva de<br /> vuelta a los mejores momentos del pasado.
             </p>

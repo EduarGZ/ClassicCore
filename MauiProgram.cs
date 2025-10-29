@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using MauiApp1.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace MauiApp1
 {
@@ -6,7 +11,13 @@ namespace MauiApp1
     {
         public static MauiApp CreateMauiApp()
         {
+
+
+
             var builder = MauiApp.CreateBuilder();
+
+            builder.Services.AddSingleton<UserService>();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>

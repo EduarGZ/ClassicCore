@@ -1,5 +1,7 @@
 ﻿@page "/Alias"
 @using MauiApp1.Components.Layout;
+@inject NavigationManager Navigation
+@inject MauiApp1.Services.UserService UserService
 @layout SinMenuLayout;
 
 <div class="boddy">
@@ -7,11 +9,11 @@
 		<center>
 			<div class="nombre-container">
 				<label for="nombre">Ingresa tu nombre o alias:</label>
-				<input id="nombre" type="text" class="nombre-input" />
+				<input id="nombre" type="text" class="nombre-input" @bind="UserService.Nombre" />
 			</div>
-			<NavLink class="neon-btn verde-manzana" href="Inicio">
+			<button class="neon-btn verde-manzana" @onclick="IrAInicio">
 				🚀 Comencemos
-			</NavLink>
+			</button>
 		</center>
 		<div class="symbols">
 			<!-- Simbolitos regados -->
@@ -42,3 +44,9 @@
 		</div>
 	</div>
 </div>
+@code {
+	private void IrAInicio()
+	{
+		Navigation.NavigateTo("/inicio");
+	}
+}
